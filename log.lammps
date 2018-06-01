@@ -167,3 +167,191 @@ Step Temp Press Volume
     1000      247.012 2.7043334e+08    146423.24 
     2000    245.56444 2.7043338e+08    146423.24 
     3000    244.69186 2.7043311e+08    146423.24 
+    4000    244.87903 2.7043273e+08    146423.24 
+    5000    245.33765 2.7043284e+08    146423.24 
+    6000    245.27742 2.7043287e+08    146423.24 
+    7000    243.94273 2.7043314e+08    146423.24 
+    8000    247.98904 2.7043315e+08    146423.24 
+    9000    246.47348 2.7043326e+08    146423.24 
+   10000    241.95994 2.7043311e+08    146423.24 
+Loop time of 1018.89 on 1 procs for 10000 steps with 11062 atoms
+
+Performance: 0.424 ns/day, 56.605 hours/ns, 9.815 timesteps/s
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 874.22     | 874.22     | 874.22     |   0.0 | 85.80
+Bond    | 0.014174   | 0.014174   | 0.014174   |   0.0 |  0.00
+Kspace  | 91.608     | 91.608     | 91.608     |   0.0 |  8.99
+Neigh   | 39.012     | 39.012     | 39.012     |   0.0 |  3.83
+Comm    | 2.6099     | 2.6099     | 2.6099     |   0.0 |  0.26
+Output  | 0.069113   | 0.069113   | 0.069113   |   0.0 |  0.01
+Modify  | 10.608     | 10.608     | 10.608     |   0.0 |  1.04
+Other   |            | 0.7448     |            |       |  0.07
+
+Nlocal:    11062 ave 11062 max 11062 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    27041 ave 27041 max 27041 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    5.07342e+06 ave 5.07342e+06 max 5.07342e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 5073422
+Ave neighs/atom = 458.635
+Ave special neighs/atom = 1.73784
+Neighbor list builds = 339
+Dangerous builds = 0
+
+#deform the simulation box to obtain the correct water density
+fix def all deform 1 z final 5.444 69.556 units box remap none
+run 40000
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:321)
+  G vector (1/distance) = 0.248719
+  grid = 40 24 45
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00304493
+  estimated relative force accuracy = 9.16972e-06
+  using double precision FFTs
+  3d grid and FFT values/proc = 75764 43200
+Per MPI rank memory allocation (min/avg/max) = 51.39 | 51.39 | 51.39 Mbytes
+Step Temp Press Volume 
+   10000    241.95994 2.7043311e+08    146423.24 
+   11000    239.33479 2.7141834e+08    145891.82 
+   12000    241.28156 2.7241039e+08     145360.4 
+   13000    244.17978 2.7341006e+08    144828.98 
+   14000    245.43428 2.7441691e+08    144297.56 
+   15000    244.72564 2.7543135e+08    143766.14 
+   16000    249.90309 2.7645334e+08    143234.73 
+   17000    243.47695 2.7748292e+08    142703.31 
+   18000    238.26321 2.785198e+08    142171.89 
+   19000    241.10659 2.7956505e+08    141640.47 
+   20000    241.23504 2.8061793e+08    141109.05 
+   21000    241.99381 2.8167862e+08    140577.63 
+   22000    240.36338 2.8274736e+08    140046.21 
+   23000     244.1327 2.8382444e+08    139514.79 
+   24000    245.75913 2.8490992e+08    138983.38 
+   25000    248.87941 2.8600331e+08    138451.96 
+   26000    240.00045 2.871055e+08    137920.54 
+   27000    242.48854 2.8821565e+08    137389.12 
+   28000    242.33499 2.8933513e+08     136857.7 
+   29000    242.22826 2.9046289e+08    136326.28 
+   30000    244.17598 2.9159952e+08    135794.86 
+   31000    245.16671 2.9274519e+08    135263.45 
+   32000    241.19309 2.9389991e+08    134732.03 
+   33000    238.83634 2.950637e+08    134200.61 
+   34000    242.59108 2.9623679e+08    133669.19 
+   35000    241.53131 2.9741913e+08    133137.77 
+   36000    246.72242 2.9861095e+08    132606.35 
+   37000    244.71043 2.9981301e+08    132074.93 
+   38000    242.03215 3.010239e+08    131543.51 
+   39000    242.37874 3.022451e+08     131012.1 
+   40000    242.48009 3.0347574e+08    130480.68 
+   41000    241.16991 3.0471686e+08    129949.26 
+   42000    239.13696 3.0596813e+08    129417.84 
+   43000    242.02095 3.0722966e+08    128886.42 
+   44000    239.95459 3.085016e+08       128355 
+   45000    245.25995 3.0978457e+08    127823.58 
+   46000    241.56876 3.1107784e+08    127292.16 
+   47000    242.48349 3.1238203e+08    126760.75 
+   48000    242.28259 3.1369707e+08    126229.33 
+   49000    245.18215 3.150231e+08    125697.91 
+   50000    242.36296 3.1636061e+08    125166.49 
+Loop time of 5605.43 on 1 procs for 40000 steps with 11062 atoms
+
+Performance: 0.308 ns/day, 77.853 hours/ns, 7.136 timesteps/s
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 4570.3     | 4570.3     | 4570.3     |   0.0 | 81.53
+Bond    | 0.07859    | 0.07859    | 0.07859    |   0.0 |  0.00
+Kspace  | 451.69     | 451.69     | 451.69     |   0.0 |  8.06
+Neigh   | 150.73     | 150.73     | 150.73     |   0.0 |  2.69
+Comm    | 15.008     | 15.008     | 15.008     |   0.0 |  0.27
+Output  | 0.35341    | 0.35341    | 0.35341    |   0.0 |  0.01
+Modify  | 412.65     | 412.65     | 412.65     |   0.0 |  7.36
+Other   |            | 4.639      |            |       |  0.08
+
+Nlocal:    11062 ave 11062 max 11062 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    31148 ave 31148 max 31148 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    5.72998e+06 ave 5.72998e+06 max 5.72998e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 5729977
+Ave neighs/atom = 517.987
+Ave special neighs/atom = 1.73784
+Neighbor list builds = 1066
+Dangerous builds = 0
+unfix def
+
+#After the deformation, let the system to relax for a while to avoid unnormal states.
+run 10000
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:321)
+  G vector (1/distance) = 0.24957
+  grid = 40 24 40
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00309852
+  estimated relative force accuracy = 9.33109e-06
+  using double precision FFTs
+  3d grid and FFT values/proc = 68479 38400
+Per MPI rank memory allocation (min/avg/max) = 53.36 | 53.36 | 53.36 Mbytes
+Step Temp Press Volume 
+   50000    242.36296 3.1636058e+08    125166.49 
+   51000     241.1839 3.1636036e+08    125166.49 
+   52000    243.88401 3.1636044e+08    125166.49 
+   53000    237.57416 3.1636037e+08    125166.49 
+   54000    243.53777 3.1636039e+08    125166.49 
+   55000    240.53827 3.1636036e+08    125166.49 
+   56000    245.43308 3.163605e+08    125166.49 
+   57000    243.99882 3.1636052e+08    125166.49 
+   58000    240.05425 3.1636033e+08    125166.49 
+   59000    241.11468 3.1636046e+08    125166.49 
+   60000    246.35626 3.163605e+08    125166.49 
+Loop time of 1365.89 on 1 procs for 10000 steps with 11062 atoms
+
+Performance: 0.316 ns/day, 75.883 hours/ns, 7.321 timesteps/s
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 1199.9     | 1199.9     | 1199.9     |   0.0 | 87.85
+Bond    | 0.02185    | 0.02185    | 0.02185    |   0.0 |  0.00
+Kspace  | 107.63     | 107.63     | 107.63     |   0.0 |  7.88
+Neigh   | 38.998     | 38.998     | 38.998     |   0.0 |  2.86
+Comm    | 4.6254     | 4.6254     | 4.6254     |   0.0 |  0.34
+Output  | 0.083899   | 0.083899   | 0.083899   |   0.0 |  0.01
+Modify  | 13.433     | 13.433     | 13.433     |   0.0 |  0.98
+Other   |            | 1.151      |            |       |  0.08
+
+Nlocal:    11062 ave 11062 max 11062 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    31564 ave 31564 max 31564 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    5.70709e+06 ave 5.70709e+06 max 5.70709e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 5707093
+Ave neighs/atom = 515.919
+Ave special neighs/atom = 1.73784
+Neighbor list builds = 264
+Dangerous builds = 0
+undump waterdump
+
+region upperreservoir block INF INF INF INF 42 INF units box
+group  upperreservoir region upperreservoir
+4730 atoms in group upperreservoir
+
+compute	msdin	upperreservoir	msd
+fix	4	all	ave/time	100	10	1000	c_msdin	file	msd.profile	mode	vector
+
+compute den1 ox chunk/atom bin/2d x lower 0.5 bound z 34 41 #command to divide the region into cells
+ERROR: Illegal compute chunk/atom command (../compute_chunk_atom.cpp:1965)
+Last command: compute den1 ox chunk/atom bin/2d x lower 0.5 bound z 34 41 #command to divide the region into cells
