@@ -5,7 +5,7 @@ boundary   p p p
 atom_style full
 read_data IniData.dat
   orthogonal box = (0 0 0) to (61.06 31.9736 75)
-  2 by 1 by 2 MPI processor grid
+  2 by 1 by 4 MPI processor grid
   reading atoms ...
   11062 atoms
   scanning bonds ...
@@ -146,7 +146,7 @@ PPPM initialization ...
   estimated absolute RMS force accuracy = 0.00304493
   estimated relative force accuracy = 9.16972e-06
   using double precision FFTs
-  3d grid and FFT values/proc = 24273 11520
+  3d grid and FFT values/proc = 15066 5760
 Neighbor list info ...
   update every 1 steps, delay 0 steps, check yes
   max neighbors/atom: 2000, page size: 100000
@@ -159,8 +159,198 @@ Neighbor list info ...
       pair build: half/bin/newton
       stencil: half/bin/3d/newton
       bin: standard
-Per MPI rank memory allocation (min/avg/max) = 22.63 | 23.08 | 23.52 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 11.91 | 12.79 | 13.65 Mbytes
 Step Temp Press Volume 
        0    366.97213 2.7044821e+08    146423.24 
-    1000    247.01202 2.7043334e+08    146423.24 
-    2000    245.50024 2.7043338e+08    146423.24 
+    1000    247.01197 2.7043334e+08    146423.24 
+    2000    245.77032 2.7043339e+08    146423.24 
+    3000    244.94237 2.7043307e+08    146423.24 
+    4000    243.26418 2.7043287e+08    146423.24 
+    5000    246.35109 2.7043306e+08    146423.24 
+    6000    241.43482 2.7043287e+08    146423.24 
+    7000      247.685 2.7043305e+08    146423.24 
+    8000    244.70098 2.7043288e+08    146423.24 
+    9000     237.8737 2.7043304e+08    146423.24 
+   10000    247.86295 2.7043306e+08    146423.24 
+Loop time of 296.522 on 8 procs for 10000 steps with 11062 atoms
+
+Performance: 1.457 ns/day, 16.473 hours/ns, 33.724 timesteps/s
+82.2% CPU use with 8 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 143.29     | 162.97     | 183.53     | 107.3 | 54.96
+Bond    | 0.0089808  | 0.010561   | 0.012414   |   1.3 |  0.00
+Kspace  | 77.163     | 96.747     | 115.91     | 135.8 | 32.63
+Neigh   | 11.022     | 11.084     | 11.193     |   1.7 |  3.74
+Comm    | 10.82      | 11.886     | 12.482     |  15.2 |  4.01
+Output  | 0.035988   | 0.036259   | 0.037933   |   0.3 |  0.01
+Modify  | 12.191     | 12.343     | 12.572     |   3.7 |  4.16
+Other   |            | 1.446      |            |       |  0.49
+
+Nlocal:    1382.75 ave 1564 max 1135 min
+Histogram: 1 0 1 0 0 1 3 1 0 1
+Nghost:    10732.9 ave 11271 max 10179 min
+Histogram: 2 2 0 0 0 0 0 0 3 1
+Neighs:    632104 ave 719762 max 416780 min
+Histogram: 1 0 0 0 0 1 2 0 1 3
+
+Total # of neighbors = 5056828
+Ave neighs/atom = 457.135
+Ave special neighs/atom = 1.73784
+Neighbor list builds = 343
+Dangerous builds = 0
+
+#deform the simulation box to obtain the correct water density
+fix def all deform 1 z final 5.444 69.556 units box remap none
+run 40000
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:321)
+  G vector (1/distance) = 0.248719
+  grid = 40 24 45
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00304493
+  estimated relative force accuracy = 9.16972e-06
+  using double precision FFTs
+  3d grid and FFT values/proc = 15066 5760
+Per MPI rank memory allocation (min/avg/max) = 12.7 | 13.23 | 13.65 Mbytes
+Step Temp Press Volume 
+   10000    247.86295 2.7043306e+08    146423.24 
+   11000    247.21212 2.7141818e+08    145891.82 
+   12000    242.71865 2.7241061e+08     145360.4 
+   13000     236.4121   2.7341e+08    144828.98 
+   14000    240.52832 2.7441697e+08    144297.56 
+   15000    240.21204 2.7543131e+08    143766.14 
+   16000    243.00593 2.7645321e+08    143234.73 
+   17000    241.18307 2.7748272e+08    142703.31 
+   18000    237.74565 2.7852005e+08    142171.89 
+   19000    246.12684 2.7956506e+08    141640.47 
+   20000    246.38784 2.8061774e+08    141109.05 
+   21000     245.3234 2.8167874e+08    140577.63 
+   22000    239.66486 2.8274755e+08    140046.21 
+   23000    240.96547 2.8382465e+08    139514.79 
+   24000    245.82188 2.8490994e+08    138983.38 
+   25000    242.73749 2.8600354e+08    138451.96 
+   26000    247.18725 2.8710539e+08    137920.54 
+   27000    239.44374 2.8821597e+08    137389.12 
+   28000      249.587 2.8933514e+08     136857.7 
+   29000    244.93456 2.9046326e+08    136326.28 
+   30000    247.45321 2.9159975e+08    135794.86 
+   31000    244.01482 2.9274544e+08    135263.45 
+   32000    240.14179 2.9390022e+08    134732.03 
+   33000    237.77539 2.9506373e+08    134200.61 
+   34000    241.59734 2.9623708e+08    133669.19 
+   35000    243.50343 2.9741926e+08    133137.77 
+   36000    244.89338 2.9861124e+08    132606.35 
+   37000    242.51817 2.9981262e+08    132074.93 
+   38000    243.86374 3.0102411e+08    131543.51 
+   39000    245.36514 3.0224531e+08     131012.1 
+   40000    246.13374 3.0347582e+08    130480.68 
+   41000    237.50181 3.0471709e+08    129949.26 
+   42000    241.13486 3.0596816e+08    129417.84 
+   43000    243.95453 3.0722971e+08    128886.42 
+   44000    240.64363 3.085019e+08       128355 
+   45000    247.39027 3.0978435e+08    127823.58 
+   46000    243.52029 3.1107758e+08    127292.16 
+   47000    242.54655 3.1238206e+08    126760.75 
+   48000    247.27339 3.1369693e+08    126229.33 
+   49000    245.93877 3.1502323e+08    125697.91 
+   50000    242.75305 3.1636062e+08    125166.49 
+Loop time of 1215.21 on 8 procs for 40000 steps with 11062 atoms
+
+Performance: 1.422 ns/day, 16.878 hours/ns, 32.916 timesteps/s
+89.0% CPU use with 8 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 536.97     | 701.91     | 796.4      | 288.6 | 57.76
+Bond    | 0.033679   | 0.042461   | 0.050542   |   2.9 |  0.00
+Kspace  | 212.29     | 306.03     | 467.34     | 429.1 | 25.18
+Neigh   | 33.455     | 33.498     | 33.562     |   0.6 |  2.76
+Comm    | 38.538     | 40.899     | 44.41      |  32.1 |  3.37
+Output  | 0.11948    | 0.12569    | 0.14293    |   2.3 |  0.01
+Modify  | 107.99     | 117.37     | 123.2      |  55.1 |  9.66
+Other   |            | 15.33      |            |       |  1.26
+
+Nlocal:    1382.75 ave 1450 max 1318 min
+Histogram: 1 0 0 1 2 3 0 0 0 1
+Nghost:    12509.6 ave 12762 max 12271 min
+Histogram: 1 3 0 0 0 0 0 1 1 2
+Neighs:    719370 ave 803002 max 621212 min
+Histogram: 2 1 0 0 0 0 1 2 0 2
+
+Total # of neighbors = 5754957
+Ave neighs/atom = 520.246
+Ave special neighs/atom = 1.73784
+Neighbor list builds = 1070
+Dangerous builds = 0
+unfix def
+
+#After the deformation, let the system to relax for a while to avoid unnormal states.
+run 10000
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:321)
+  G vector (1/distance) = 0.24957
+  grid = 40 24 40
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00309852
+  estimated relative force accuracy = 9.33109e-06
+  using double precision FFTs
+  3d grid and FFT values/proc = 14229 4800
+Per MPI rank memory allocation (min/avg/max) = 13.21 | 13.72 | 14.45 Mbytes
+Step Temp Press Volume 
+   50000    242.75305 3.1636059e+08    125166.49 
+   51000    238.36045 3.1636045e+08    125166.49 
+   52000    242.33997 3.163608e+08    125166.49 
+   53000    242.31806 3.1636069e+08    125166.49 
+   54000    245.74267 3.1636039e+08    125166.49 
+   55000    246.64966 3.1636033e+08    125166.49 
+   56000    238.71873 3.1636045e+08    125166.49 
+   57000    242.53017 3.1636024e+08    125166.49 
+   58000    247.46083 3.1636051e+08    125166.49 
+   59000    244.40019 3.1636042e+08    125166.49 
+   60000    237.92437 3.1636019e+08    125166.49 
+Loop time of 284.75 on 8 procs for 10000 steps with 11062 atoms
+
+Performance: 1.517 ns/day, 15.819 hours/ns, 35.118 timesteps/s
+91.2% CPU use with 8 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 158.42     | 186.51     | 202.12     | 120.0 | 65.50
+Bond    | 0.0087197  | 0.010678   | 0.014813   |   1.8 |  0.00
+Kspace  | 50.516     | 65.764     | 93.863     | 201.8 | 23.10
+Neigh   | 8.6965     | 8.7149     | 8.7352     |   0.4 |  3.06
+Comm    | 9.7401     | 10.262     | 10.692     |  10.2 |  3.60
+Output  | 0.034112   | 0.034529   | 0.036365   |   0.4 |  0.01
+Modify  | 11.809     | 11.95      | 12.084     |   2.9 |  4.20
+Other   |            | 1.508      |            |       |  0.53
+
+Nlocal:    1382.75 ave 1473 max 1336 min
+Histogram: 3 1 1 0 1 0 0 0 1 1
+Nghost:    12446 ave 12849 max 12058 min
+Histogram: 3 1 0 0 0 0 0 0 2 2
+Neighs:    710941 ave 793479 max 596386 min
+Histogram: 2 0 0 0 1 1 0 1 1 2
+
+Total # of neighbors = 5687530
+Ave neighs/atom = 514.15
+Ave special neighs/atom = 1.73784
+Neighbor list builds = 266
+Dangerous builds = 0
+undump waterdump
+
+region upperreservoir block INF INF INF INF 42 INF units box
+group  upperreservoir region upperreservoir
+4848 atoms in group upperreservoir
+
+compute	msdin	upperreservoir	msd
+fix	4	all	ave/time	100	10	1000	c_msdin	file	msd.profile	mode	vector
+
+compute den1 ox chunk/atom bin/1d x lower 0.5 bound z 34 41 #command to divide the region into cells
+compute den2 ox chunk/atom bin/2d x lower 0.5 bound z 34 41
+ERROR: Illegal compute chunk/atom command (../compute_chunk_atom.cpp:1965)
+Last command: compute den2 ox chunk/atom bin/2d x lower 0.5 bound z 34 41
