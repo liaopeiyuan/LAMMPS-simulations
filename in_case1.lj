@@ -115,7 +115,7 @@ group  upperreservoir region upperreservoir
 compute	msdin	upperreservoir	msd 
 fix	4	all	ave/time	100	10	1000	c_msdin	file	msd.profile	mode	vector					
 
-compute den1 ox chunk/atom bin/2d x lower 0.5 bound z 34 41 #command to divide the region into cells
+compute den1 ox chunk/atom bin/1d x lower 0.5 bound z 34 41 #command to divide the region into cells
 compute den2 ox chunk/atom bin/2d x lower 0.5 bound z 34 41
 fix NdensityX_ave ox ave/chunk 1000 10 10000 den1 density/number file numdensity_t.profile ave running overwrite  #this is for all simulation averaging
 fix NdensityX_t ox ave/chunk 1000 20 20000 den2 density/number file numdensity_ave.profile ave one  #this is for partial averaging
