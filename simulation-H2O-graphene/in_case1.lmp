@@ -1,0 +1,133 @@
+units      real
+dimension  3
+boundary   p p p
+atom_style full
+read_data IniData.dat
+
+##  set charges
+group cb type 3
+group ox type 2
+group hy type 1
+group H2O union hy ox
+set group ox charge -0.834
+set group hy charge 0.417
+set group cb charge 0
+
+###Define layers 
+
+region upperlayer block INF INF INF INF 40 42 units box
+group upperlayer region upperlayer
+
+region lowerlayer block INF INF INF INF 33 35 units box
+group lowerlayer region lowerlayer
+
+group layers union upperlayer lowerlayer
+
+###Define water reservoir
+
+
+region lowerreservoir block INF INF INF INF INF 33 units box
+group lowerreservoir region lowerreservoir
+
+
+###Define gates
+
+region upgate block 17.5 27.5 INF INF 40 42 units box
+group upgate region upgate
+
+region lowgate block 32.5 42.5 INF INF 33 35 units box
+group lowgate region lowgate
+
+group gate union upgate lowgate
+
+
+
+###Define channel
+
+region channel block INF INF INF INF 34 41 units box
+group channel dynamic ox region channel every 10
+group channel1 region channel
+
+region exchannel1 block INF INF INF INF 41 INF units box
+group Exchannel dynamic all region exchannel1 every 1
+
+
+
+### Rigid TIP3P Potential Parameters ###
+pair_style lj/charmm/coul/long 10.0 12.0 
+pair_coeff 2 2 0.1521 3.1506
+pair_coeff 1 1 0.046 0.4
+pair_coeff 1 2 0.08364 1.7753
+pair_coeff 3 3 0.07 3.98
+pair_coeff 1 3 0 0
+pair_coeff 2 3 0.0936902 3.19
+
+bond_style  harmonic
+bond_coeff  1 450 0.9572
+angle_style harmonic
+angle_coeff 1 55 104.52
+kspace_style pppm 1.0e-5 
+
+velocity H2O create 300.0 123456789 sum yes units box 
+velocity cb set 0 0 0 sum yes units box
+compute myTemp H2O temp/com 
+
+neighbor 2.0 bin
+neigh_modify delay 0 every 1 check yes
+thermo      1000
+thermo_style custom step temp press vol
+thermo_modify norm no flush yes
+timestep 0.5
+
+fix RigidH2O H2O shake 0.0001 500 0 b 1 a 1
+fix 1 H2O nvt temp 298 298 50
+fix freeze cb setforce 0.0 0.0 0.0
+fix_modify 1 temp myTemp
+
+#Define variables to calculate the average velocity and the number of water molecules inside the channel
+variable	channelONum equal count(ox,channel)
+variable	ExchannelONum equal count(ox,exchannel1)
+variable	adforce equal -28.0902/v_ExchannelONum
+compute	channelOVel channel reduce ave vz
+compute	Exchannel0Vel Exchannel reduce ave vz
+
+
+#Calculate the average values overtime
+fix 2 all ave/time 100 10 1000 v_channelONum c_channelOVel c_Exchannel0Vel file waterflux.profile
+fix 	3	all 	ave/time	100	10	1000	v_ExchannelONum		file waterflux2.profile
+
+#run variables
+dump waterdump all atom 1000 298K.1Bar.dump
+run 10000
+
+#deform the simulation box to obtain the correct water density
+fix def all deform 1 z final 5.444 69.556 units box remap none
+run 40000
+unfix def
+
+#After the deformation, let the system to relax for a while to avoid unnormal states.
+run 10000
+undump waterdump
+
+region upperreservoir block INF INF INF INF 42 INF units box
+group  upperreservoir region upperreservoir
+
+compute	msdin	upperreservoir	msd 
+fix	4	all	ave/time	100	10	1000	c_msdin	file	msd.profile	mode	vector					
+
+compute den1 ox chunk/atom bin/1d x lower 0.5 bound z 34 41 #command to divide the region into cells
+compute den2 ox chunk/atom bin/1d x lower 0.5 bound z 34 41
+fix NdensityX_ave ox ave/chunk 1000 10 10000 den1 density/number file numdensity_t.profile ave running overwrite  #this is for all simulation averaging
+fix NdensityX_t ox ave/chunk 1000 20 20000 den2 density/number file numdensity_ave.profile ave one  #this is for partial averaging
+
+#For my case, I open the channel by deleting the atoms. For your cases, you may also use this way or think your own and better ways.
+delete_atoms group gate
+
+##Add a pressure of 100MPa to push the water molecules to go through the channel
+
+fix addP Exchannel addforce 0.0 0.0 v_adforce
+dump waterdump1 all atom 1000 298K.10MPaflux.dump
+
+restart 100000 system_run.*.restart
+run 900000
+clear
